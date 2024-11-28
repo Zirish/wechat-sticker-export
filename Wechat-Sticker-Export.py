@@ -44,17 +44,10 @@ def download_images(links, output_folder):
             except requests.RequestException as e:
                 logging.error(f"下载 {link} 失败：{e}")
 
-def print_help():
-    print("Usage: python Wechat-Sticker-Export.py [--list] [--dry] [--help|-h]")
-    print("  --list    将所有提取出的链接打印到 link.txt 中")
-    print("  --dry     不执行下载图片的操作")
-    print("  --help, -h 打印出接收的参数")
-
 def main():
     parser = argparse.ArgumentParser(description="微信表情包导出工具")
     parser.add_argument("--list", action="store_true", help="将所有提取出的链接打印到 link.txt 中")
     parser.add_argument("--dry", action="store_true", help="不执行下载图片的操作")
-    parser.add_argument("--help", "-h", action="help", help="打印出接收的参数")
     args = parser.parse_args()
 
     base_path = os.path.expanduser("~/Library/Containers/com.tencent.xinWeChat/Data/Library/Application Support/com.tencent.xinWeChat/2.0b4.0.9/")
