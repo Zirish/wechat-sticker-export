@@ -16,16 +16,12 @@ def extract_links(archive_path):
     try:
         with open(archive_path, "rb") as file:
             content = file.read().decode("latin1")
-            links = extract_links_from_content(content)
+            links = [re.sub(r"(bizid=\d+).*", r"\1", link) for link in re.findall(r"https?://[^\s]+", content)]
     except OSError as e:
         logging.error(f"未能打开文件 {archive_path}：{e}")
     except UnicodeDecodeError as e:
         logging.error(f"未能解析文件 {archive_path}：{e}")
     return links
-
-# 从内容中提取链接
-def extract_links_from_content(content):
-    return [re.sub(r"(bizid=\d+).*", r"\1", link) for link in re.findall(r"https?://[^\s]+", content)]
 
 # 下载图片并保存到指定文件夹
 def download_images(links, output_folder, timeout):
