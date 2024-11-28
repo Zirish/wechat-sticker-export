@@ -1,7 +1,7 @@
 import os
 import re
 import requests
-import imghdr
+import filetype
 import glob
 
 def extract_links(archive_path):
@@ -20,9 +20,9 @@ def download_images(links, output_folder):
             try:
                 response = session.get(link.strip(), timeout=10)
                 response.raise_for_status()
-                image_type = imghdr.what(None, h=response.content)
-                if image_type:
-                    with open(os.path.join(output_folder, f"image_{index + 1}.{image_type}"), "wb") as img_file:
+                kind = filetype.guess(response.content)
+                if kind:
+                    with open(os.path.join(output_folder, f"image_{index + 1}.{kind.extension}"), "wb") as img_file:
                         img_file.write(response.content)
                 else:
                     print(f"错误：无法检测链接 {index + 1} 的图片类型：{link}")
