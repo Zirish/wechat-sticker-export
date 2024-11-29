@@ -10,3 +10,16 @@
 ```
 pip install -r requirements.txt
 ```
+
+**直接使用**：
+```
+python -m Wechat-Sticker-Export.py [-h] [--list] [--dry] [--output OUTPUT] [--timeout TIMEOUT] [--log LOG]
+```
+
+**参数**：
+* -h, --help         显示帮助
+* --list             将表情包下载链接输出到`link.txt`
+* --dry              只获取链接，不从微信服务器下载表情包
+* --output OUTPUT    指定下载路径。默认为downloaded_images
+* --timeout TIMEOUT  指定超时。默认为None
+* --log LOG          指定log路径。默认为wechat_sticker_export.log

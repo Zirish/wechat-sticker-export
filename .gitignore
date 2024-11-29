@@ -3,3 +3,4 @@ wechat_sticker_export.log
 links.txt
 downloaded_images
 .DS_Store
+__pycache__
